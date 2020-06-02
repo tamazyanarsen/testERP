@@ -1,0 +1,18 @@
+.main-block{
+    background: #E5E5E5;
+    box-sizing: border-box;
+    padding: 3%;
+    height: 100vh;
+}
+
+.item-add-button, .section-add-button{
+    width: 48%;
+    margin: 1%;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
