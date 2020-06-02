@@ -24,7 +24,6 @@ export class ItemService {
         sections.forEach(e => {
             this.changeItems(e);
         });
-        console.log(sections);
         return sections;
     }
 }
