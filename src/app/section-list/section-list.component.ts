@@ -1,5 +1,5 @@
 /* tslint:disable:member-ordering */
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Section } from '../models/Section';
@@ -27,6 +27,9 @@ export class SectionListComponent implements OnInit, OnChanges {
     }
 
     @Input() sections: Section[];
+    @Output() selectedNodeEvent = new EventEmitter<Section>();
+
+    selectedNode: Section;
 
     treeControl = new FlatTreeControl<FlatNode>(
         node => node.level, node => node.expandable);
@@ -36,6 +39,8 @@ export class SectionListComponent implements OnInit, OnChanges {
         return {
             expandable: !!node.sections && node.sections.length > 0,
             name: node.name,
+            isMain: node.isMain || false,
+            sale: node.sale || 0,
             level,
         };
     }
@@ -55,5 +60,10 @@ export class SectionListComponent implements OnInit, OnChanges {
     }
 
     hasChild = (_: number, node: FlatNode) => node.expandable;
+
+    setSelectedNode(node) {
+        this.selectedNode = node;
+        this.selectedNodeEvent.emit(node);
+    }
 
 }

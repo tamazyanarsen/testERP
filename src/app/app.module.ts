@@ -1,25 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AppComponent, SectionDialogComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatTreeModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTreeModule
+} from '@angular/material';
 import { SectionListComponent } from './section-list/section-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
-        SectionListComponent
+        SectionListComponent,
+        SectionDialogComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         MatButtonModule,
         MatTreeModule,
-        MatIconModule
+        MatIconModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatSelectModule
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [SectionDialogComponent]
 })
 export class AppModule {
 }

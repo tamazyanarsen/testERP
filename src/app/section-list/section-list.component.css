@@ -1,0 +1,17 @@
+mat-tree {
+    background: none;
+}
+
+mat-tree-node {
+    background: whitesmoke;
+    margin: 3%;
+    border-radius: 10px;
+}
+
+.mat-tree-node-active {
+    background: cornflowerblue;
+}
+
+.mat-tree-node-main {
+    border-left: green solid 3px;
+}

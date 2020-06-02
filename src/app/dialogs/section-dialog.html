@@ -1,0 +1,33 @@
+<div mat-dialog-content>
+    <div style="display: flex">
+        <p>Добавить раздел</p>
+        <button mat-button
+                (click)="onNoClick()">Отмена
+        </button>
+    </div>
+    <mat-form-field>
+        <mat-label>Название</mat-label>
+        <label>
+            <input matInput
+                   [(ngModel)]="data.section.name">
+        </label>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Раздел</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let section of data.itemsForSelect"
+                        [value]="section.name">
+                {{section.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button
+            color="primary"
+            [mat-dialog-close]="data.name"
+            style="width: 100%"
+            cdkFocusInitial
+            (click)="save(data.section)">Сохранить
+    </button>
+</div>

@@ -23,6 +23,7 @@ export class ItemService {
     getSections() {
         sections.forEach(e => {
             this.changeItems(e);
+            e.isMain = true;
         });
         return sections;
     }

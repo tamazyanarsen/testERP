@@ -2,10 +2,10 @@
     <div><b>Основное меню</b></div>
     <hr style="width: 100%">
     <div>
-        <button mat-stroked-button class="section-add-button">Раздел</button>
+        <button mat-stroked-button class="section-add-button" (click)="addSection()">Раздел</button>
         <button mat-stroked-button class="item-add-button">Позиция</button>
     </div>
     <div [class.content]="!(items && items.length)" [class.main-content]="items && items.length">
-        <app-section-list [sections]="items"></app-section-list>
+        <app-section-list [sections]="items" (selectedNodeEvent)="getSelectedNode($event)"></app-section-list>
     </div>
 </div>
