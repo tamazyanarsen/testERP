@@ -5,7 +5,7 @@
         <button mat-stroked-button class="section-add-button">Раздел</button>
         <button mat-stroked-button class="item-add-button">Позиция</button>
     </div>
-    <div class="content">
-        <app-section-list></app-section-list>
+    <div [class.content]="!(items && items.length)" [class.main-content]="items && items.length">
+        <app-section-list [sections]="items"></app-section-list>
     </div>
 </div>

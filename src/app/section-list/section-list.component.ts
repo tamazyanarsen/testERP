@@ -1,18 +1,59 @@
-import { Component, Input, OnInit } from '@angular/core';
+/* tslint:disable:member-ordering */
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Section } from '../models/Section';
+
+interface FlatNode {
+    expandable: boolean;
+    name: string;
+    level: number;
+}
+
 
 @Component({
     selector: 'app-section-list',
     templateUrl: './section-list.component.html',
     styleUrls: ['./section-list.component.css']
 })
-export class SectionListComponent implements OnInit {
+export class SectionListComponent implements OnInit, OnChanges {
 
-    @Input() sections: object;
+    get transformer(): (e: Section, l: number) => FlatNode {
+        return this._transformer;
+    }
 
     constructor() {
+        this.dataSource.data = this.sections || [];
+    }
+
+    @Input() sections: Section[];
+
+    treeControl = new FlatTreeControl<FlatNode>(
+        node => node.level, node => node.expandable);
+
+    // tslint:disable-next-line:variable-name
+    private _transformer = (node: Section, level: number) => {
+        return {
+            expandable: !!node.sections && node.sections.length > 0,
+            name: node.name,
+            level,
+        };
+    }
+
+    treeFlattener = new MatTreeFlattener<Section, FlatNode>(
+        this.transformer, node => node.level, node => node.expandable, node => node.sections);
+
+    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.sections) {
+            this.dataSource.data = this.sections || [];
+        }
     }
 
     ngOnInit() {
     }
+
+    hasChild = (_: number, node: FlatNode) => node.expandable;
 
 }
